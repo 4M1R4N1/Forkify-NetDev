@@ -19,4 +19,10 @@ export default class Recipe {
             alert(error)            
         }        
     }
+
+    parseIngredients(){
+        const unitsLong = ['tablespoons', 'tablespoon', 'ounces', 'ounce', 'teaspoons', 'teaspoon', 'cups'];
+        const unitsShort = ['tbsp', 'tbsp', 'oz', 'oz', 'tsp', 'tsp', 'cup'];
+
+    }
 }
