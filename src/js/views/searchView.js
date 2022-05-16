@@ -14,7 +14,7 @@ export const activeLinkStyle = (id) => {
 
     resArr.forEach(el => el.classList.remove('results__link--active'));
 
-    document.querySelector(`a[href="#${id}"]`).classList.add('esults__link--active')
+    document.querySelector(`a[href="#${id}"]`).classList.add('results__link--active')
 
 }
 
