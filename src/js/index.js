@@ -70,12 +70,31 @@ const controlList = () =>{
     // Create a new list
     if(!state.list) state.list = new List();
 
+    listView.clearShoppingList();
+
     // add each ingredients
     state.recipe.ingredients.forEach(el => {
         const item = state.list.addItems(el.count, el.unit, el.ingredient);
         listView.renderItem(item);
     });
 }
+
+// Handle delete and update list item events
+elements.shopping.addEventListener('click', e =>{
+    const id = e.target.closest('.shopping__item').dataset.itemid;
+
+    if(e.target.matches('.shopping__delete, .shopping__delete *')){
+        // delete items
+        state.list.deleteItem(id);
+        listView.deleteItem(id);
+
+    }else if(e.target.matches('.shopping__count__input')){
+        // update items
+        const newValue = +e.target.value;
+        state.list.updateItem(id, newValue);
+
+    }
+});
 
 elements.searchForm.addEventListener('submit', (e) => {
     e.preventDefault();
