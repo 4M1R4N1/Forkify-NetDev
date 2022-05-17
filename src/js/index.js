@@ -91,10 +91,14 @@ window.addEventListener('load', () => {
 elements.recipe.addEventListener('click', e => {
     if(e.target.matches('.btn-decrease, .btn-decrease *')){
         // Decrease button
-        console.log('-')
+        if(state.recipe.servings > 1){
+            state.recipe.updateServingIngredient('dec');
+            recipeView.updateServingIngredient(state.recipe);
+        }        
     }else if(e.target.matches('.btn-increase, .btn-increase *')){
         // Increase button
-        console.log('+')
+        state.recipe.updateServingIngredient('inc');
+        recipeView.updateServingIngredient(state.recipe);
 
     }
 })
