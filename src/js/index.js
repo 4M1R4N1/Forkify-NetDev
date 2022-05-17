@@ -1,8 +1,11 @@
 import Recipe from "./models/Recipe";
 import Search from "./models/search";
+import List from "./models/List";
 import { clearLoader, elements, renderLoader } from "./views/base";
 import * as searchView from "./views/searchView";
 import * as recipeView from "./views/recipeView";
+import * as listView from "./views/listView";
+
 
 
 const state = {};
@@ -59,9 +62,19 @@ const controlRecipe = async () =>{
 
         clearLoader();
         recipeView.renderRecipe(state.recipe);
-
-
     }
+}
+
+// Shopping List
+const controlList = () =>{
+    // Create a new list
+    if(!state.list) state.list = new List();
+
+    // add each ingredients
+    state.recipe.ingredients.forEach(el => {
+        const item = state.list.addItems(el.count, el.unit, el.ingredient);
+        listView.renderItem(item);
+    });
 }
 
 elements.searchForm.addEventListener('submit', (e) => {
@@ -99,6 +112,8 @@ elements.recipe.addEventListener('click', e => {
         // Increase button
         state.recipe.updateServingIngredient('inc');
         recipeView.updateServingIngredient(state.recipe);
+    }else if(e.target.matches('.recipe__btn__add, .recipe__btn__add *')){
+        controlList();
 
     }
 })
